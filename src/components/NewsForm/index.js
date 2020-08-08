@@ -10,6 +10,7 @@ class NewForm extends Component {
     state = {
         title: null,
         urlPath: null,
+        featuredImage: null,
         category: 'select-category',
         editorState: EditorState.createEmpty()
     };
@@ -20,6 +21,10 @@ class NewForm extends Component {
 
     onUrlChange = e => {
         this.setState({ urlPath: e.target.value });
+    };
+
+    onFeaturedImageChange = e => {
+        this.setState({ featuredImage: e.target.value });
     };
 
     onEditorStateChange = editorState => {
@@ -42,6 +47,7 @@ class NewForm extends Component {
             .set({
                 datePosted: Date.now(),
                 title: this.state.title,
+                featuredImage: this.state.featuredImage,
                 text: draftToHtml(convertToRaw(editorState.getCurrentContent()))
             })
             .then(() => {
@@ -66,6 +72,13 @@ class NewForm extends Component {
                     type="text"
                     placeholder="URL path"
                     className={styles.url}
+                />
+
+                <input
+                    onChange={this.onFeaturedImageChange}
+                    type="text"
+                    placeholder="Fetured image url"
+                    className={styles['featured-image']}
                 />
 
                 <div className={styles.texteditor}>
