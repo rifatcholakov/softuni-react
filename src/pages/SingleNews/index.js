@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import { db } from '../../configs/firebase';
+import styles from './index.module.css';
+import Button from '../../components/Button';
 
 class SingleNews extends Component {
     state = {
-        newsArticle: {}
+        article: {}
     };
 
     componentDidMount() {
@@ -14,24 +16,61 @@ class SingleNews extends Component {
             .doc(url)
             .get()
             .then(doc => {
-                const newsArticle = doc.data();
-                console.log(newsArticle);
+                const article = doc.data();
                 this.setState({
-                    newsArticle
+                    article
                 });
-                console.log(this.state.newsArticle);
             });
     }
 
+    onEdit = () => {
+        const category = this.props.match.params.category;
+        const url = this.props.match.params.postURL;
+
+        this.props.history.push(`/edit/${category}/${url}`);
+    };
+
+    onDelete = () => {
+        const category = this.props.match.params.category;
+        const url = this.props.match.params.postURL;
+
+        db.collection(category)
+            .doc(url)
+            .delete()
+            .then(() => this.props.history.push('/'));
+    };
+
     render() {
+        const datePosted = new Date(
+            this.state.article.datePosted
+        ).toLocaleDateString();
+
         return (
             <article>
                 <img
-                    src={this.state.newsArticle.featuredImage}
-                    alt={this.state.newsArticle.title}
+                    className={styles['featured-image']}
+                    src={this.state.article.featuredImage}
+                    alt={this.state.article.title}
                 />
-                <h2>{this.state.newsArticle.title}</h2>
-                <div></div>
+                <h2 className={styles.title}>{this.state.article.title}</h2>
+                <time className={styles.date}>Posted: {datePosted}</time>
+                <div
+                    className={styles.content}
+                    dangerouslySetInnerHTML={{
+                        __html: this.state.article.text
+                    }}
+                ></div>
+                <div className={styles.buttons}>
+                    <Button text="Edit" onClick={this.onEdit} />
+                    <Button
+                        text="Delete"
+                        styles={{
+                            backgroundColor: '#dc3545',
+                            marginLeft: '7px'
+                        }}
+                        onClick={this.onDelete}
+                    />
+                </div>
             </article>
         );
     }

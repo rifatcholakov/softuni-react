@@ -3,8 +3,8 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import styles from './app.module.css';
 import Header from './components/Header';
 import Footer from './components/Footer';
-import NewPost from './pages/NewPost';
 import SingleNews from './pages/SingleNews';
+import NewsForm from './components/NewsForm';
 
 const App = () => {
     return (
@@ -13,7 +13,25 @@ const App = () => {
                 <Header />
 
                 <Switch>
-                    <Route path="/new-post" component={NewPost} />
+                    <Route
+                        path="/new-article"
+                        render={routeProps => (
+                            <NewsForm
+                                {...routeProps}
+                                quote="You create the news 😉"
+                            />
+                        )}
+                    />
+                    <Route
+                        path="/edit/:category/:postURL"
+                        render={routeProps => (
+                            <NewsForm
+                                {...routeProps}
+                                editMode={true}
+                                quote="Editing is - perfecting it 👌"
+                            />
+                        )}
+                    />
                     <Route path="/:category/:postURL" component={SingleNews} />
                 </Switch>
 
