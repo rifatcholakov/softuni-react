@@ -7,25 +7,25 @@ const Header = () => {
         <div>
             <h1 className={styles.logo}>the news</h1>
             <nav className={styles.navigation}>
-                <Link to="#" className={styles.link}>
+                <Link to="/category/world" className={styles.link}>
                     World
                 </Link>
-                <Link to="#" className={styles.link}>
+                <Link to="/category/politics" className={styles.link}>
                     Politics
                 </Link>
-                <Link to="#" className={styles.link}>
+                <Link to="/category/business" className={styles.link}>
                     Business
                 </Link>
-                <Link to="#" className={styles.link}>
+                <Link to="/category/health" className={styles.link}>
                     Health
                 </Link>
-                <Link to="#" className={styles.link}>
+                <Link to="/category/entertainment" className={styles.link}>
                     Entertainment
                 </Link>
-                <Link to="#" className={styles.link}>
+                <Link to="/category/travel" className={styles.link}>
                     Travel
                 </Link>
-                <Link to="#" className={styles.link}>
+                <Link to="/category/sport" className={styles.link}>
                     Sport
                 </Link>
             </nav>

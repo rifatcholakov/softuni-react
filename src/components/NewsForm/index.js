@@ -3,6 +3,7 @@ import { EditorState, convertToRaw, ContentState } from 'draft-js';
 import { Editor } from 'react-draft-wysiwyg';
 import draftToHtml from 'draftjs-to-html';
 import htmlToDraft from 'html-to-draftjs';
+import SimpleReactValidator from 'simple-react-validator';
 
 import { db } from '../../configs/firebase';
 import Button from '../Button';
@@ -11,13 +12,18 @@ import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import styles from './index.module.css';
 
 class NewForm extends Component {
-    state = {
-        title: '',
-        urlPath: '',
-        featuredImage: '',
-        editorState: EditorState.createEmpty(),
-        category: 'select-category'
-    };
+    constructor(props) {
+        super(props);
+        this.validator = new SimpleReactValidator({ autoForceUpdate: this });
+
+        this.state = {
+            title: '',
+            urlPath: '',
+            featuredImage: '',
+            editorState: EditorState.createEmpty(),
+            category: ''
+        };
+    }
 
     loadArticle = () => {
         db.collection(this.props.match.params.category)
@@ -47,7 +53,9 @@ class NewForm extends Component {
     }
 
     onFieldChange = e => {
-        this.setState({ [e.target.name]: e.target.value });
+        const { name, value } = e.target;
+
+        this.setState({ [name]: value });
     };
 
     onEditorStateChange = editorState => {
@@ -94,15 +102,20 @@ class NewForm extends Component {
     onFormSubmit = e => {
         e.preventDefault();
 
-        if (this.props.editMode) {
-            this.updateArticle();
+        if (this.validator.allValid()) {
+            if (this.props.editMode) {
+                // Valid Form
+                this.updateArticle();
+            } else {
+                this.addNewArticle();
+            }
         } else {
-            this.addNewArticle();
+            this.validator.showMessages();
         }
     };
 
     render() {
-        const { editorState } = this.state;
+        const { editorState, errors } = this.state;
 
         return (
             <div>
@@ -116,6 +129,11 @@ class NewForm extends Component {
                         className={styles.title}
                         name="title"
                     />
+                    {this.validator.message(
+                        'title',
+                        this.state.title,
+                        'required'
+                    )}
 
                     <input
                         onChange={this.onFieldChange}
@@ -126,6 +144,11 @@ class NewForm extends Component {
                         className={styles.url}
                         name="urlPath"
                     />
+                    {this.validator.message(
+                        'urlPath',
+                        this.state.urlPath,
+                        'required|alpha_num_dash'
+                    )}
 
                     <input
                         onChange={this.onFieldChange}
@@ -135,6 +158,11 @@ class NewForm extends Component {
                         className={styles['featured-image']}
                         name="featuredImage"
                     />
+                    {this.validator.message(
+                        'featuredImage',
+                        this.state.featuredImage,
+                        'required|url'
+                    )}
 
                     <div className={styles.texteditor}>
                         <Editor
@@ -152,7 +180,7 @@ class NewForm extends Component {
                         onChange={this.onFieldChange}
                         name="category"
                     >
-                        <option value="select-category" disabled>
+                        <option value="" disabled>
                             Select category
                         </option>
                         <option value="world">World</option>
@@ -163,7 +191,16 @@ class NewForm extends Component {
                         <option value="travel">Travel</option>
                         <option value="sport">Sport</option>
                     </select>
-                    <Button text="Post" styles={{ display: 'block' }} />
+                    {this.validator.message(
+                        'category',
+                        this.state.category,
+                        'required'
+                    )}
+
+                    <Button
+                        text={this.props.editMode ? 'Update' : 'Post'}
+                        styles={{ display: 'block' }}
+                    />
                 </form>
             </div>
         );

@@ -5,6 +5,7 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import SingleNews from './pages/SingleNews';
 import NewsForm from './components/NewsForm';
+import Category from './pages/Category';
 
 const App = () => {
     return (
@@ -32,6 +33,16 @@ const App = () => {
                             />
                         )}
                     />
+                    <Route path="/category/world" component={Category} />
+                    <Route path="/category/politics" component={Category} />
+                    <Route path="/category/business" component={Category} />
+                    <Route path="/category/health" component={Category} />
+                    <Route
+                        path="/category/entertainment"
+                        component={Category}
+                    />
+                    <Route path="/category/travel" component={Category} />
+                    <Route path="/category/sport" component={Category} />
                     <Route path="/:category/:postURL" component={SingleNews} />
                 </Switch>
 
