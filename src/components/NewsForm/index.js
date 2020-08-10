@@ -14,7 +14,12 @@ import styles from './index.module.css';
 class NewForm extends Component {
     constructor(props) {
         super(props);
-        this.validator = new SimpleReactValidator({ autoForceUpdate: this });
+        this.validator = new SimpleReactValidator({
+            autoForceUpdate: this,
+            element: (message, className) => (
+                <div className={className}>{message}</div>
+            )
+        });
 
         this.state = {
             title: '',
@@ -115,7 +120,7 @@ class NewForm extends Component {
     };
 
     render() {
-        const { editorState, errors } = this.state;
+        const { editorState } = this.state;
 
         return (
             <div>
@@ -132,7 +137,8 @@ class NewForm extends Component {
                     {this.validator.message(
                         'title',
                         this.state.title,
-                        'required'
+                        'required',
+                        { className: styles.error }
                     )}
 
                     <input
@@ -147,7 +153,8 @@ class NewForm extends Component {
                     {this.validator.message(
                         'urlPath',
                         this.state.urlPath,
-                        'required|alpha_num_dash'
+                        'required|alpha_num_dash',
+                        { className: styles.error }
                     )}
 
                     <input
@@ -161,7 +168,8 @@ class NewForm extends Component {
                     {this.validator.message(
                         'featuredImage',
                         this.state.featuredImage,
-                        'required|url'
+                        'required|url',
+                        { className: styles.error }
                     )}
 
                     <div className={styles.texteditor}>
@@ -194,7 +202,8 @@ class NewForm extends Component {
                     {this.validator.message(
                         'category',
                         this.state.category,
-                        'required'
+                        'required',
+                        { className: styles.error }
                     )}
 
                     <Button

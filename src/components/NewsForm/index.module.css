@@ -65,3 +65,8 @@
     margin: 50px 0 10px 0;
     font-size: 18px;
 }
+
+.error {
+    color: #dc3545;
+    font-family: sans-serif;
+}
