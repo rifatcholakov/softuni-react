@@ -36,3 +36,10 @@
     color: #dc3545;
     font-family: sans-serif;
 }
+
+.spcial-error {
+    color: #dc3545;
+    font-family: sans-serif;
+    padding: 5px 20px;
+    text-align: center;
+}

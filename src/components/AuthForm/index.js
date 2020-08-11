@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import SimpleReactValidator from 'simple-react-validator';
 
 import Button from '../Button';
+import { auth } from '../../configs/firebase';
 
 import styles from './index.module.css';
 
@@ -11,7 +12,8 @@ class AuthForm extends Component {
         this.state = {
             email: '',
             password: '',
-            confirmPassword: ''
+            confirmPassword: '',
+            error: null
         };
         this.validator = new SimpleReactValidator({
             autoForceUpdate: this,
@@ -31,11 +33,38 @@ class AuthForm extends Component {
         });
     };
 
+    createNewAccount = () => {
+        if (this.state.password !== this.state.confirmPassword) {
+            return this.setState({ error: 'Passwords do not match!' });
+        }
+
+        auth.createUserWithEmailAndPassword(
+            this.state.email,
+            this.state.password
+        )
+            .then(result => () => this.props.history.push('/'))
+            .catch(error => {
+                this.setState({
+                    error: error.message
+                });
+            });
+    };
+
+    signIn() {
+        auth.signInWithEmailAndPassword(this.state.email, this.state.password)
+            .then(() => {
+                this.props.history.push('/');
+            })
+            .catch(error => {
+                this.setState({ error: error.message });
+            });
+    }
+
     onFormSubmit = e => {
         e.preventDefault();
 
         if (this.validator.allValid()) {
-            alert('You submitted the form and stuff!');
+            this.createAccountMode ? this.createNewAccount() : this.signIn();
         } else {
             this.validator.showMessages();
         }
@@ -55,6 +84,8 @@ class AuthForm extends Component {
                     onSubmit={this.onFormSubmit}
                     className={styles.form}
                 >
+                    <p className={styles['spcial-error']}>{this.state.error}</p>
+
                     <input
                         onChange={this.onFieldChange}
                         type="email"
