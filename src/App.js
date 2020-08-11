@@ -6,6 +6,7 @@ import Footer from './components/Footer';
 import SingleNews from './pages/SingleNews';
 import NewsForm from './components/NewsForm';
 import Category from './pages/Category';
+import AuthForm from './components/AuthForm';
 
 const App = () => {
     return (
@@ -23,6 +24,7 @@ const App = () => {
                             />
                         )}
                     />
+                    <Route path="/create-account" component={AuthForm} />
                     <Route
                         path="/edit/:category/:postURL"
                         render={routeProps => (
