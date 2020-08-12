@@ -7,36 +7,36 @@ import SingleNews from './pages/SingleNews';
 import NewsForm from './components/NewsForm';
 import Category from './pages/Category';
 import AuthForm from './components/AuthForm';
-import UserProvider from './providers/UserProvider';
+import { AuthProvider } from './providers/AuthProvider';
+import ProtectedRoute from './components/ProtectedRoute';
 
 const App = () => {
     return (
-        <UserProvider>
+        <AuthProvider>
             <div className={styles.container}>
                 <BrowserRouter>
                     <Header />
 
                     <Switch>
-                        <Route
+                        <ProtectedRoute
+                            authenticate={true}
                             path="/new-article"
-                            render={routeProps => (
-                                <NewsForm
-                                    {...routeProps}
-                                    quote="You create the news 😉"
-                                />
-                            )}
+                            component={NewsForm}
                         />
-                        <Route path="/create-account" component={AuthForm} />
-                        <Route path="/sign-in" component={AuthForm} />
-                        <Route
+                        <ProtectedRoute
+                            authenticate={true}
                             path="/edit/:category/:postURL"
-                            render={routeProps => (
-                                <NewsForm
-                                    {...routeProps}
-                                    editMode={true}
-                                    quote="Editing is - perfecting it 👌"
-                                />
-                            )}
+                            component={NewsForm}
+                        />
+                        <ProtectedRoute
+                            authenticate={false}
+                            path="/create-account"
+                            component={AuthForm}
+                        />
+                        <ProtectedRoute
+                            authenticate={false}
+                            path="/sign-in"
+                            component={AuthForm}
                         />
                         <Route path="/category/world" component={Category} />
                         <Route path="/category/politics" component={Category} />
@@ -57,7 +57,7 @@ const App = () => {
                     <Footer />
                 </BrowserRouter>
             </div>
-        </UserProvider>
+        </AuthProvider>
     );
 };
 

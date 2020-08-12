@@ -52,7 +52,9 @@ class NewForm extends Component {
     };
 
     componentDidMount() {
-        if (this.props.editMode) {
+        const mode = this.props.match.url.split('/')[1];
+
+        if (mode === 'edit') {
             this.loadArticle();
         }
     }
@@ -109,7 +111,6 @@ class NewForm extends Component {
 
         if (this.validator.allValid()) {
             if (this.props.editMode) {
-                // Valid Form
                 this.updateArticle();
             } else {
                 this.addNewArticle();
@@ -124,7 +125,7 @@ class NewForm extends Component {
 
         return (
             <div>
-                <p className={styles.quote}>{this.props.quote}</p>
+                <p className={styles.quote}>Make sure the story is great 😉</p>
                 <form onSubmit={this.onFormSubmit}>
                     <input
                         onChange={this.onFieldChange}

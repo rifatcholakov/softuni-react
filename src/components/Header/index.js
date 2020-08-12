@@ -1,10 +1,16 @@
 import React from 'react';
 import styles from './index.module.css';
 import { Link } from 'react-router-dom';
+import { auth } from '../../configs/firebase';
+
+const logout = () => {
+    auth.signOut();
+};
 
 const Header = () => {
     return (
         <div>
+            <button onClick={logout}>Log Out</button>
             <h1 className={styles.logo}>the news</h1>
             <nav className={styles.navigation}>
                 <Link to="/category/world" className={styles.link}>
