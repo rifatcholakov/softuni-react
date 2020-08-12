@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
-import styles from './styles.css';
 
-ReactDOM.render(<App className={styles} />, document.querySelector('#root'));
+ReactDOM.render(<App />, document.querySelector('#root'));
