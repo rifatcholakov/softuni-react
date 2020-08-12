@@ -2,11 +2,14 @@ import React, { Component } from 'react';
 import { db } from '../../configs/firebase';
 import styles from './index.module.css';
 import Button from '../../components/Button';
+import { AuthContext } from '../../providers/AuthProvider';
 
 class SingleNews extends Component {
     state = {
         article: {}
     };
+
+    static contextType = AuthContext;
 
     componentDidMount() {
         const category = this.props.match.params.category;
@@ -45,6 +48,8 @@ class SingleNews extends Component {
             this.state.article.datePosted
         ).toLocaleDateString();
 
+        const { currentUser } = this.context;
+
         return (
             <article>
                 <img
@@ -60,17 +65,21 @@ class SingleNews extends Component {
                         __html: this.state.article.text
                     }}
                 ></div>
-                <div className={styles.buttons}>
-                    <Button text="Edit" onClick={this.onEdit} />
-                    <Button
-                        text="Delete"
-                        styles={{
-                            backgroundColor: '#dc3545',
-                            marginLeft: '7px'
-                        }}
-                        onClick={this.onDelete}
-                    />
-                </div>
+                {currentUser ? (
+                    <div className={styles.buttons}>
+                        <Button text="Edit" onClick={this.onEdit} />
+                        <Button
+                            text="Delete"
+                            styles={{
+                                backgroundColor: '#dc3545',
+                                marginLeft: '7px'
+                            }}
+                            onClick={this.onDelete}
+                        />
+                    </div>
+                ) : (
+                    ''
+                )}
             </article>
         );
     }
