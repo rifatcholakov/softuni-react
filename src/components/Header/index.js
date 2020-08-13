@@ -5,17 +5,14 @@ import { auth } from '../../configs/firebase';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes, faChevronDown } from '@fortawesome/free-solid-svg-icons';
 
-// const logout = () => {
-//     auth.signOut();
-// };
-
 const Header = () => {
     const [showMenu, setShowMenu] = useState(true);
 
     return (
         <div>
-            {/* <button onClick={logout}>Log Out</button> */}
-            <h1 className={styles.logo}>the news</h1>
+            <Link to="/" className={styles.nostyle}>
+                <h1 className={styles.logo}>the news</h1>
+            </Link>
             <div className={styles['menu-wrapper']}>
                 <button
                     className={styles['mobile-btn']}

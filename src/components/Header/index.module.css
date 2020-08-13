@@ -1,16 +1,15 @@
 .logo {
     text-align: center;
     font-size: 48px;
-    /* text-shadow: 1px 1px 1px rgba(150, 150, 150, 1); */
     font-style: bold;
     text-transform: uppercase;
     margin: 20px 10px;
-    /* font-family: sans-serif; */
+    text-decoration: none;
 }
 
 .topnav {
-    border-top: 2px solid #ccc;
-    border-bottom: 2px solid #ccc;
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
     text-align: center;
     padding: 15px 30px;
 }
@@ -18,20 +17,27 @@
 .link {
     color: #000;
     text-decoration: none;
-    font-size: 21px;
+    font-size: 23px;
     font-weight: bold;
     font-family: sans-serif;
+    font-weight: 500;
     margin: 15px;
+}
+
+.active {
+    text-decoration: underline;
 }
 
 .mobile-btn {
     display: none;
 }
 
-@media screen and (max-width: 862px) {
-    .menu-wrapper {
-    }
+.nostyle {
+    text-decoration: none;
+    color: #000;
+}
 
+@media screen and (max-width: 862px) {
     .mobile-btn {
         display: inline-block;
         border: 1px solid #000;
@@ -60,6 +66,8 @@
         margin: 0;
         padding: 10px 25px 12px 25px;
         text-align: left;
+        font-weight: 300;
+        font-size: 20px;
     }
 
     .link:active {
@@ -68,6 +76,7 @@
     }
 
     .active {
+        text-decoration: none;
         background-color: #000;
         color: #fff;
     }

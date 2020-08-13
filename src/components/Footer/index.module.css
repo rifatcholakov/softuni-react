@@ -1,3 +1,11 @@
 .footer {
     border-top: 2px solid #ccc;
+    font-family: sans-serif;
+}
+
+.link {
+    text-decoration: none;
+    color: #000;
+    font-weight: 600;
+    font-family: serif;
 }
