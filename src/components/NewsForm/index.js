@@ -124,7 +124,7 @@ class NewForm extends Component {
         const { editorState } = this.state;
 
         return (
-            <div>
+            <div className={styles.wrapper}>
                 <p className={styles.quote}>Make sure the story is great 😉</p>
                 <form onSubmit={this.onFormSubmit}>
                     <input

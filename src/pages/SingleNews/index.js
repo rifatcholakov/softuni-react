@@ -72,7 +72,8 @@ class SingleNews extends Component {
                             text="Delete"
                             styles={{
                                 backgroundColor: '#dc3545',
-                                marginLeft: '7px'
+                                marginLeft: '7px',
+                                marginTop: '5px'
                             }}
                             onClick={this.onDelete}
                         />

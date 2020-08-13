@@ -70,3 +70,13 @@
     color: #dc3545;
     font-family: sans-serif;
 }
+
+@media all and (max-width: 960px) {
+    .wrapper {
+        padding: 5%;
+    }
+
+    .category {
+        width: 100%;
+    }
+}
