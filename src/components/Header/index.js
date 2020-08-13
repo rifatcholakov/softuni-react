@@ -9,7 +9,7 @@ const Header = () => {
     const [showMenu, setShowMenu] = useState(true);
 
     return (
-        <div>
+        <div className={styles.wrapper}>
             <Link to="/" className={styles.nostyle}>
                 <h1 className={styles.logo}>the news</h1>
             </Link>
