@@ -1,40 +1,90 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './index.module.css';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { auth } from '../../configs/firebase';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTimes, faChevronDown } from '@fortawesome/free-solid-svg-icons';
 
-const logout = () => {
-    auth.signOut();
-};
+// const logout = () => {
+//     auth.signOut();
+// };
 
 const Header = () => {
+    const [showMenu, setShowMenu] = useState(true);
+
     return (
         <div>
-            <button onClick={logout}>Log Out</button>
+            {/* <button onClick={logout}>Log Out</button> */}
             <h1 className={styles.logo}>the news</h1>
-            <nav className={styles.navigation}>
-                <Link to="/category/world" className={styles.link}>
-                    World
-                </Link>
-                <Link to="/category/politics" className={styles.link}>
-                    Politics
-                </Link>
-                <Link to="/category/business" className={styles.link}>
-                    Business
-                </Link>
-                <Link to="/category/health" className={styles.link}>
-                    Health
-                </Link>
-                <Link to="/category/entertainment" className={styles.link}>
-                    Entertainment
-                </Link>
-                <Link to="/category/travel" className={styles.link}>
-                    Travel
-                </Link>
-                <Link to="/category/sport" className={styles.link}>
-                    Sport
-                </Link>
-            </nav>
+            <div className={styles['menu-wrapper']}>
+                <button
+                    className={styles['mobile-btn']}
+                    onClick={() =>
+                        showMenu ? setShowMenu(false) : setShowMenu(true)
+                    }
+                >
+                    {showMenu ? (
+                        <FontAwesomeIcon icon={faChevronDown} size="2x" />
+                    ) : (
+                        <FontAwesomeIcon icon={faTimes} size="2x" />
+                    )}
+                </button>
+                <nav
+                    className={`${styles.topnav} ${
+                        showMenu ? styles.menu : 'none'
+                    }`}
+                >
+                    <NavLink
+                        to="/category/world"
+                        className={styles.link}
+                        activeClassName={styles.active}
+                    >
+                        World
+                    </NavLink>
+                    <NavLink
+                        to="/category/politics"
+                        className={styles.link}
+                        activeClassName={styles.active}
+                    >
+                        Politics
+                    </NavLink>
+                    <NavLink
+                        to="/category/business"
+                        className={styles.link}
+                        activeClassName={styles.active}
+                    >
+                        Business
+                    </NavLink>
+                    <NavLink
+                        to="/category/health"
+                        className={styles.link}
+                        activeClassName={styles.active}
+                    >
+                        Health
+                    </NavLink>
+                    <NavLink
+                        to="/category/entertainment"
+                        className={styles.link}
+                        activeClassName={styles.active}
+                    >
+                        Entertainment
+                    </NavLink>
+                    <NavLink
+                        to="/category/travel"
+                        className={styles.link}
+                        activeClassName={styles.active}
+                    >
+                        Travel
+                    </NavLink>
+                    <NavLink
+                        to="/category/sport"
+                        className={styles.link}
+                        activeClassName={styles.active}
+                    >
+                        Sport
+                    </NavLink>
+                </nav>
+            </div>
         </div>
     );
 };

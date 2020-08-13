@@ -1,14 +1,14 @@
 .logo {
     text-align: center;
     font-size: 48px;
-    text-shadow: 2px 2px 2px rgba(150, 150, 150, 1);
-    /* text-decoration: underline; */
+    /* text-shadow: 1px 1px 1px rgba(150, 150, 150, 1); */
     font-style: bold;
     text-transform: uppercase;
     margin: 20px 10px;
+    /* font-family: sans-serif; */
 }
 
-.navigation {
+.topnav {
     border-top: 2px solid #ccc;
     border-bottom: 2px solid #ccc;
     text-align: center;
@@ -22,4 +22,63 @@
     font-weight: bold;
     font-family: sans-serif;
     margin: 15px;
+}
+
+.mobile-btn {
+    display: none;
+}
+
+@media screen and (max-width: 862px) {
+    .menu-wrapper {
+    }
+
+    .mobile-btn {
+        display: inline-block;
+        border: 1px solid #000;
+        outline: none;
+        padding: 5px 10px;
+        width: 100%;
+        background-color: #fff;
+    }
+
+    .menu {
+        display: none;
+    }
+
+    .topnav {
+        padding: 5px;
+        border: none;
+    }
+
+    .menu-wrapper {
+        padding: 0 6%;
+    }
+
+    .link {
+        display: block;
+        border-bottom: 1px solid #000;
+        margin: 0;
+        padding: 10px 25px 12px 25px;
+        text-align: left;
+    }
+
+    .link:active {
+        color: #fff;
+        background-color: #000;
+    }
+
+    .active {
+        background-color: #000;
+        color: #fff;
+    }
+}
+
+@media screen and (max-width: 350px) {
+    .logo {
+        font-size: 32px;
+    }
+
+    .mobile-btn {
+        padding: 3px 6px;
+    }
 }
