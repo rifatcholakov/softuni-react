@@ -6,7 +6,10 @@ import { AuthContext } from '../../providers/AuthProvider';
 
 class SingleNews extends Component {
     state = {
-        article: {}
+        featuredImage: '',
+        title: '',
+        text: '',
+        datePostedString: ''
     };
 
     static contextType = AuthContext;
@@ -21,8 +24,22 @@ class SingleNews extends Component {
             .then(doc => {
                 const article = doc.data();
                 this.setState({
-                    article
+                    ...article
                 });
+
+                this.setState({
+                    datePostedString: new Date(
+                        this.state.datePosted
+                    ).toLocaleDateString()
+                });
+
+                if (!article) {
+                    this.props.history.push('/not-found');
+                }
+            })
+            .catch(err => {
+                console.log(err);
+                this.props.history.push('/not-found');
             });
     }
 
@@ -44,25 +61,23 @@ class SingleNews extends Component {
     };
 
     render() {
-        const datePosted = new Date(
-            this.state.article.datePosted
-        ).toLocaleDateString();
-
         const { currentUser } = this.context;
 
         return (
             <article>
                 <img
                     className={styles['featured-image']}
-                    src={this.state.article.featuredImage}
-                    alt={this.state.article.title}
+                    src={this.state.featuredImage}
+                    alt={this.state.title}
                 />
-                <h2 className={styles.title}>{this.state.article.title}</h2>
-                <time className={styles.date}>Posted: {datePosted}</time>
+                <h2 className={styles.title}>{this.state.title}</h2>
+                <time className={styles.date}>
+                    Posted: {this.state.datePostedString}
+                </time>
                 <div
                     className={styles.content}
                     dangerouslySetInnerHTML={{
-                        __html: this.state.article.text
+                        __html: this.state.text
                     }}
                 ></div>
                 {currentUser ? (

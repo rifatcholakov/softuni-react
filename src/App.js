@@ -1,62 +1,23 @@
 import React from 'react';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import styles from './app.module.css';
+import { BrowserRouter } from 'react-router-dom';
+import TopNav from './components/TopNav';
 import Header from './components/Header';
 import Footer from './components/Footer';
-import SingleNews from './pages/SingleNews';
-import NewsForm from './components/NewsForm';
-import Category from './pages/Category';
-import AuthForm from './components/AuthForm';
+import Routes from './components/Routes';
 import { AuthProvider } from './providers/AuthProvider';
-import ProtectedRoute from './components/ProtectedRoute';
+import styles from './app.module.css';
 
 const App = () => {
     return (
         <AuthProvider>
-            <div className={styles.container}>
-                <BrowserRouter>
+            <BrowserRouter>
+                <TopNav />
+                <div className={styles.container}>
                     <Header />
-
-                    <Switch>
-                        <ProtectedRoute
-                            authenticate={true}
-                            path="/new-article"
-                            component={NewsForm}
-                        />
-                        <ProtectedRoute
-                            authenticate={true}
-                            path="/edit/:category/:postURL"
-                            component={NewsForm}
-                        />
-                        <ProtectedRoute
-                            authenticate={false}
-                            path="/create-account"
-                            component={AuthForm}
-                        />
-                        <ProtectedRoute
-                            authenticate={false}
-                            path="/sign-in"
-                            component={AuthForm}
-                        />
-                        <Route path="/category/world" component={Category} />
-                        <Route path="/category/politics" component={Category} />
-                        <Route path="/category/business" component={Category} />
-                        <Route path="/category/health" component={Category} />
-                        <Route
-                            path="/category/entertainment"
-                            component={Category}
-                        />
-                        <Route path="/category/travel" component={Category} />
-                        <Route path="/category/sport" component={Category} />
-                        <Route
-                            path="/:category/:postURL"
-                            component={SingleNews}
-                        />
-                    </Switch>
-
+                    <Routes />
                     <Footer />
-                </BrowserRouter>
-            </div>
+                </div>
+            </BrowserRouter>
         </AuthProvider>
     );
 };

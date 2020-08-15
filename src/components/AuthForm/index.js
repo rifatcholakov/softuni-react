@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import SimpleReactValidator from 'simple-react-validator';
+import { Link } from 'react-router-dom';
 
 import Button from '../Button';
 import { auth } from '../../configs/firebase';
@@ -141,6 +142,22 @@ class AuthForm extends Component {
                                 : 'Sign in'
                         }
                     />
+
+                    {this.createAccountMode ? (
+                        <p>
+                            Already have an account?{' '}
+                            <Link to="/sign-in" className={styles.link}>
+                                Click here
+                            </Link>
+                        </p>
+                    ) : (
+                        <p>
+                            Don't have an account?{' '}
+                            <Link to="/create-account" className={styles.link}>
+                                Click here
+                            </Link>
+                        </p>
+                    )}
                 </form>
             </div>
         );

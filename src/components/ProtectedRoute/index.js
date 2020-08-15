@@ -11,13 +11,23 @@ const ProtectedRoute = ({ component: RouteComponent, ...rest }) => {
             render={routeProps => {
                 if (rest.authenticate) {
                     if (!!currentUser) {
-                        return <RouteComponent {...routeProps} />;
+                        return (
+                            <RouteComponent
+                                key={window.location.pathname}
+                                {...routeProps}
+                            />
+                        );
                     } else {
                         return <Redirect to={'/sign-in'} />;
                     }
                 } else {
                     if (!currentUser) {
-                        return <RouteComponent {...routeProps} />;
+                        return (
+                            <RouteComponent
+                                key={window.location.pathname}
+                                {...routeProps}
+                            />
+                        );
                     } else {
                         return <Redirect to={'/'} />;
                     }
