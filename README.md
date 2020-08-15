@@ -1,4 +1,4 @@
-# StackOvergrow(like StackOverflow)
+# The News
 News app build using React - allowing you to create your own news website.
 
 <img src="https://rifatcholakov.com/wp-content/uploads/2020/08/Screenshot-52.png" />
@@ -11,7 +11,7 @@ https://stackovergrow-a6d50.web.app/
 1. Make sure you have these installed
 	- [node.js](http://nodejs.org/)
 	- [git](http://git-scm.com/)
-  - [yarn](https://yarnpkg.com/)
+        - [yarn](https://yarnpkg.com/)
 2. Clone this repository into your local machine using the terminal (mac) or Gitbash (PC) `> git clone CLONEURL`
 3. CD to the folder `cd FOLDERNAME`
 4. Run `> yarn install` to install the project dependencies
