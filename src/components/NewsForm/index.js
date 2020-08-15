@@ -125,7 +125,12 @@ class NewForm extends Component {
 
         return (
             <div className={styles.wrapper}>
-                <p className={styles.quote}>Make sure the story is great 😉</p>
+                <p className={styles.quote}>
+                    Make sure the story is great{' '}
+                    <span role="img" aria-label="emoji">
+                        😉
+                    </span>
+                </p>
                 <form onSubmit={this.onFormSubmit}>
                     <input
                         onChange={this.onFieldChange}

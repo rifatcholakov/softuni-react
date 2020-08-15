@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import styles from './index.module.css';
 import { Link, NavLink } from 'react-router-dom';
-import { auth } from '../../configs/firebase';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes, faChevronDown } from '@fortawesome/free-solid-svg-icons';
 
