@@ -21,7 +21,8 @@ class NewForm extends Component {
             )
         });
 
-        this.editMode = !!this.props.match.url.split('/')[1];
+        this.editMode = !!(this.props.match.url.split('/')[1] === 'edit');
+        console.log(this.editMode);
 
         this.state = {
             title: '',
