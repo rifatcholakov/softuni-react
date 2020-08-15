@@ -5,7 +5,7 @@ News app build using React - allowing you to create your own news website.
 
 ## Preview
 
-https://stackovergrow-a6d50.web.app/
+https://thenews-42b1a.web.app/
 
 ## Getting Started
 1. Make sure you have these installed

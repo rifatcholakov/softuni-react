@@ -1,6 +1,5 @@
 {
   "projects": {
-    "default": "thenews-42b1a",
-    "prod": "thenews-42b1a"
+    "default": "thenews-42b1a"
   }
 }
