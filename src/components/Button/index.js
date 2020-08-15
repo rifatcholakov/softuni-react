@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styles from './index.module.css';
 
 const Button = props => {
@@ -11,6 +12,12 @@ const Button = props => {
             value={props.text}
         />
     );
+};
+
+Button.propTypes = {
+    text: PropTypes.string.isRequired,
+    styles: PropTypes.object,
+    onClick: PropTypes.func
 };
 
 export default Button;

@@ -21,6 +21,8 @@ class NewForm extends Component {
             )
         });
 
+        this.editMode = !!this.props.match.url.split('/')[1];
+
         this.state = {
             title: '',
             urlPath: '',
@@ -52,9 +54,7 @@ class NewForm extends Component {
     };
 
     componentDidMount() {
-        const mode = this.props.match.url.split('/')[1];
-
-        if (mode === 'edit') {
+        if (this.editMode) {
             this.loadArticle();
         }
     }
@@ -110,7 +110,7 @@ class NewForm extends Component {
         e.preventDefault();
 
         if (this.validator.allValid()) {
-            if (this.props.editMode) {
+            if (this.editMode) {
                 this.updateArticle();
             } else {
                 this.addNewArticle();
@@ -145,7 +145,7 @@ class NewForm extends Component {
                     <input
                         onChange={this.onFieldChange}
                         value={this.state.urlPath}
-                        disabled={this.props.editMode}
+                        disabled={this.editMode}
                         type="text"
                         placeholder="URL path"
                         className={styles.url}
@@ -208,7 +208,7 @@ class NewForm extends Component {
                     )}
 
                     <Button
-                        text={this.props.editMode ? 'Update' : 'Post'}
+                        text={this.editMode ? 'Update' : 'Post'}
                         styles={{ display: 'block' }}
                     />
                 </form>
