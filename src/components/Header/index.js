@@ -10,7 +10,7 @@ const Header = () => {
 
     return (
         <div className={styles.wrapper}>
-            <Link to="/" className={styles.nostyle}>
+            <Link to="/category/world" className={styles.nostyle}>
                 <h1 className={styles.logo}>the news</h1>
             </Link>
             <div className={styles['menu-wrapper']}>

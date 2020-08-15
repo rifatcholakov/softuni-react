@@ -1,5 +1,5 @@
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 import SingleNews from '../../pages/SingleNews';
 import NewsForm from '../NewsForm';
 import Category from '../../pages/Category';
@@ -10,6 +10,9 @@ import AuthForm from '../AuthForm';
 const Routes = () => {
     return (
         <Switch>
+            <Route exact path="/">
+                <Redirect to="/category/world" />
+            </Route>
             <ProtectedRoute
                 authenticate={false}
                 path="/create-account"
