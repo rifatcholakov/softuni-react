@@ -34,7 +34,9 @@ const TopNav = () => {
                         <Link to="/new-article">New Article</Link>
                     </div>
                     <div>
-                        <a onClick={() => logOut(history)}>Log Out</a>
+                        <Link to="#" onClick={() => logOut(history)}>
+                            Log Out
+                        </Link>
                     </div>
                 </>
             )}
